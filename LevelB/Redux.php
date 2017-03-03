@@ -18,8 +18,24 @@ class Redux
      */
     public function getReductedNumber()
     {
-        $result = $this->number;
-        // @TODO
+        $result = $this->reduce($this->number);
+
+        return $result;
+    }
+
+    private function reduce($number)
+    {
+        $result = 0;
+
+        $string = (string)$number;
+        for($i=0; $i<strlen($string);$i++) {
+            $result += (int)$string[$i];
+        }
+
+        if (1 < strlen((string) $result)) {
+            $result = $this->reduce($result);
+        }
+
         return $result;
     }
 };
